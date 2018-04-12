@@ -1,3 +1,8 @@
-src/.idea
-src/venv
-src/__pycahe__
+.idea
+venv
+__pycahe__
+.coverage
+src\.idea
+src\venv
+src\__pycahe__
+src\.coverage

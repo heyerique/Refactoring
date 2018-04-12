@@ -1,5 +1,5 @@
 import csv
-from os import path, makedirs
+from os import path, makedirs, getcwd, chdir
 from idata_access import IDataAccess
 from data import Data
 
@@ -10,8 +10,9 @@ class CSVOperations(IDataAccess):
     :Author: Zhiming Liu
     """
     # CSV file path
+    __default_dir = '.'
     __path = None
-    __file_path = None
+    __dir = None
     __file_name = None
 
     # The header of data field in the CSV file. Also for data dictionaries
@@ -21,14 +22,20 @@ class CSVOperations(IDataAccess):
 
         self.__path = file_path
         paths = str(file_path).split("/")
-        if len(paths) > 1:
-            self.__file_path = "/".join(paths[0:-1])
-        self.__file_name = paths[-1]
 
-        # Initialise fieldnames
+        if len(paths) == 1:
+            self.__dir = self.__default_dir
+            self.__file_name = paths[0]
+        if len(paths) > 1:
+            self.__dir = "/".join(paths[0:-1])
+            self.__file_name = paths[-1]
+
+        self.__path = self.__dir + '/' + self.__file_name
+
+        # Initialise fieldnamess
         self._fieldnames = list(map(lambda i: i.name, Data))
         # Create the file if it doesn't exist
-        # chdir("./")
+        chdir(getcwd())
         if create:
             self.create_file()
 
@@ -37,8 +44,8 @@ class CSVOperations(IDataAccess):
         Create the CSV file at specified path
         :return: None
         """
-        if self.__file_path is not None and not path.exists(self.__file_path):
-            makedirs(self.__file_path)
+        if self.__dir is not None and not path.exists(self.__dir):
+            makedirs(self.__dir)
         # chdir(self.__file_path)
         if not self.file_exist():
             with open(self.__path, "w+") as f:

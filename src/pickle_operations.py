@@ -1,5 +1,5 @@
 from pickle import dump, load
-from os import path, makedirs
+from os import path, makedirs, getcwd, chdir
 
 
 class PickleOperations:
@@ -16,6 +16,8 @@ class PickleOperations:
         """
         self.check_path(filepath)
 
+        chdir(getcwd())
+
         with open(filepath, "wb") as pfile:
             dump(data, pfile)
 
@@ -26,6 +28,7 @@ class PickleOperations:
         :param filepath: String
         :return: None
         """
+        chdir(getcwd())
         if not path.exists(filepath):
             raise OSError("The path or the file doesn't exist")
 
@@ -40,6 +43,8 @@ class PickleOperations:
         :return: None
         """
         filedir, filename = path.split(filepath)
+
+        chdir(getcwd())
 
         if not filedir == "" and not path.exists(filedir):
             makedirs(filedir)

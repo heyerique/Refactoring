@@ -38,7 +38,7 @@ class Controller(Cmd):
         try:
             # Check if the input data source is available in this program or not
             if args[0] not in options:
-                raise ValueError("The data resource is not available.")
+                raise Exception("The data resource is not available.")
             else:
                 # Code for initialise CSV data source
                 if args[0] == "-csv":
@@ -51,6 +51,10 @@ class Controller(Cmd):
                         elif len(args) == 3:
                             if args[1] == "-a":
                                 self._std.select_source(args[0][1:], args[2], True)
+                            else:
+                                raise Exception('Invalid command.')
+                        else:
+                            raise Exception('Invalid command.')
                     except (CSVError, OSError) as e:
                         View.error(e)
                     except Exception as e:
@@ -60,24 +64,12 @@ class Controller(Cmd):
 
                 # Code for initialise database source
                 elif args[0] == "-db":
-                    try:
-                        self._std.select_source(args[0][1:])
-                    except (ConnectionError, TypeError) as e:
-                        View.error(e)
-                    except Exception as e:
-                        View.error(e)
-                    else:
-                        View.success("Data source Database is selected.")
+                    self._std.select_source(args[0][1:])
 
-                # Code for initialise XXXX data source
-                else:
-                    pass
         # Catch and display error message
-        except ValueError as e:
-            View.error(str(e) + "\n")
-            View.help_select()
         except Exception as e:
             View.error(e)
+            View.help_select()
 
     def do_add(self, line):
         """
