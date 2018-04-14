@@ -1,8 +1,8 @@
 import unittest
 import unittest.mock
 from io import StringIO
-from os import path, remove
 from controller import Controller
+
 
 class TestController03(unittest.TestCase):
     def setUp(self):
@@ -48,5 +48,5 @@ class TestController03(unittest.TestCase):
         result = {'Male': 6, 'Female': 4}
         self.assertDictEqual(self.ctl._std.get_gender(), result)
 
-if __name__ == '__main__': # pragma: no cover
-    unittest.main(verbosity=2) # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
+    unittest.main(verbosity=2)  # pragma: no cover

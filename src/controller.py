@@ -16,7 +16,8 @@ class Controller(Cmd):
         self.prompt = ">>> "
 
         # Welcome information
-        self.intro = "Welcome to Staff Information System\nEnter a keyword to start. For help, enter \"help\"."
+        self.intro = "Welcome to Staff Information System\n" \
+                     "Enter a keyword to start. For help, enter \"help\"."
 
         # Object of DataValidator, for validating data
         self._vld = DataValidator()
@@ -36,7 +37,7 @@ class Controller(Cmd):
         args = list(arg.lower() for arg in str(line).split())
 
         try:
-            # Check if the input data source is available in this program or not
+            # Check if the input data source is available
             if args[0] not in options:
                 raise Exception("The data resource is not available.")
             else:
@@ -44,13 +45,18 @@ class Controller(Cmd):
                 if args[0] == "-csv":
                     try:
                         if len(args) == 1:
-                            self._std.select_source(args[0][1:], "staffinfo.csv")
-                            View.warning("No CSV file path specified. A default file \"staffinfo.csv\" will be used.")
+                            self._std.select_source(args[0][1:],
+                                                    "staffinfo.csv")
+                            View.warning("No CSV file path specified. "
+                                         "A default file \"staffinfo.csv\" "
+                                         "will be used.")
                         elif len(args) == 2:
                             self._std.select_source(args[0][1:], args[1])
                         elif len(args) == 3:
                             if args[1] == "-a":
-                                self._std.select_source(args[0][1:], args[2], True)
+                                self._std.select_source(args[0][1:],
+                                                        args[2],
+                                                        True)
                             else:
                                 raise Exception('Invalid command.')
                         else:
@@ -74,7 +80,8 @@ class Controller(Cmd):
     def do_add(self, line):
         """
         Add a new entry of data
-        :param line: (String) [EMPID] [Age] [Gender] [Sales] [BMI] [Salary] [Birthday]
+        :param line: (String) [EMPID] [Age] [Gender] [Sales]
+                    [BMI] [Salary] [Birthday]
         :return: None
         :Author: Zhiming Liu
         """
@@ -99,7 +106,8 @@ class Controller(Cmd):
                             # Left alignment
                             e_str += "{:<10}".format(items[key])
                         key += 1
-                    raise ValueError("The following field(s) is invalid:\n%s" % e_str)
+                    raise ValueError("The following field(s) "
+                                     "is invalid:\n%s" % e_str)
                 else:
                     self._std.add_data(result)
         except (AttributeError, ValueError) as e:
@@ -266,14 +274,19 @@ class Controller(Cmd):
         """
         # Draw Pies
         try:
-            if len(self._std.get_gender()) == 0 or len(self._std.get_bmi()) == 0:
+            if len(self._std.get_gender()) == 0 \
+                    or len(self._std.get_bmi()) == 0:
                 raise ValueError("No data to display.")
             # Draw gender
             if line.upper() == Data.GENDER.name:
-                View.plot_pie(self._std.get_gender(), "Gender Distribution", "People")
+                View.plot_pie(self._std.get_gender(),
+                              "Gender Distribution",
+                              "People")
             # Draw BMI
             if line.upper() == Data.BMI.name:
-                View.plot_pie(self._std.get_bmi(), "Body Mass Index (BMI)", "People")
+                View.plot_pie(self._std.get_bmi(),
+                              "Body Mass Index (BMI)",
+                              "People")
         except ValueError as e:
             View.info(e)
         except Exception as e:
@@ -288,14 +301,19 @@ class Controller(Cmd):
         """
         # Draw Bars
         try:
-            if len(self._std.get_gender()) == 0 or len(self._std.get_gender()) == 0:
+            if len(self._std.get_gender()) == 0 \
+                    or len(self._std.get_gender()) == 0:
                 raise ValueError("No data to display.")
             # Draw gender
             if line.upper() == Data.GENDER.name:
-                View.plot_bar(self._std.get_gender(), "Gender Distribution", "numer of people")
+                View.plot_bar(self._std.get_gender(),
+                              "Gender Distribution",
+                              "numer of people")
             # Draw BMI
             if line.upper() == Data.BMI.name:
-                View.plot_bar(self._std.get_bmi(), "Body Mass Index (BMI)", "number of people")
+                View.plot_bar(self._std.get_bmi(),
+                              "Body Mass Index (BMI)",
+                              "number of people")
         except ValueError as e:
             View.info(e)
         except Exception as e:
@@ -303,7 +321,8 @@ class Controller(Cmd):
 
     @staticmethod
     def help_show():
-        View.display("This command is used for displaying all data that is existed in the system.\n")
+        View.display("This command is used for displaying all data that "
+                     "is existed in the system.\n")
         View.help_show()
 
     @staticmethod
@@ -313,33 +332,39 @@ class Controller(Cmd):
 
     @staticmethod
     def help_save():
-        View.display("This command is used for saving all newly added data to the selected data source.\n")
+        View.display("This command is used for saving all newly added data "
+                     "to the selected data source.\n")
         View.help_save()
 
     @staticmethod
     def help_select():
-        View.display("Select a source of data for reading and saving staff information.\n")
+        View.display("Select a source of data for reading "
+                     "and saving staff information.\n")
         View.help_select()
 
     @staticmethod
     def help_quit():
-        View.display("This command is used for quitting the command line mode\n")
+        View.display("This command is used for "
+                     "quitting the command line mode\n")
         View.help_quit()
 
     @staticmethod
     def help_import():
-        View.display("Import data from a file that is specified in the command line.\n")
+        View.display("Import data from a file "
+                     "that is specified in the command line.\n")
         View.help_import()
 
     @staticmethod
     def help_export():
-        View.display("Export data to a local file that is specified in the command line.\n")
+        View.display("Export data to a local file "
+                     "that is specified in the command line.\n")
         View.help_export()
 
     def do_quit(self, line):
         arg = str(line).lower()
         if not arg == "-f" and not len(self._std.new_data) == 0:
-            View.warning("The new data hasn't been saved. Enter \"quit -f\" to quit without saving.")
+            View.warning("The new data hasn't been saved. "
+                         "Enter \"quit -f\" to quit without saving.")
         else:
             View.display("Thanks for using. Bye!")
             return True

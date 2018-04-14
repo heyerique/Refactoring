@@ -17,20 +17,23 @@ class DataValidator:
     def check_empid(data):
         """
         Check if the input empID is valid.
-        :return: Formatted empid if the input one is valid, otherwise, return None
+        :return: Formatted empid if the input one is valid,
+        otherwise, return None
         Author: Vaishali Patel
         """
         # Convert the input data to string
         empid = str(data)
 
-        # Regular expression checks if there are combination of [A-Z][0-9]{3} e.r E101
+        # Regular expression checks if there are combination of
+        # [A-Z][0-9]{3} e.r E101
         # :P<empid> Assign to the group with the keyword 'empid'
         pattern = r"^(?P<empid>[A-Z][0-9]{3})$"
         match_obj = re.search(pattern, empid, re.I)
         if match_obj:
             # Get the matched word
             empid = match_obj.group("empid")
-            # Convert the first letter to Uppercase and lowercase for rest of them
+            # Convert the first letter to Uppercase
+            # and lowercase for rest of them
 
             return empid.upper()
         # Return None if no match found
@@ -80,7 +83,8 @@ class DataValidator:
     def check_sales(data):
         """
         Check if the input sales is valid.
-        :return: Formatted sales if the input one is valid, otherwise, return None
+        :return: Formatted sales if the input one is valid,
+        otherwise, return None
         :Author: Zhiming Liu
         """
         # Regular expression checks if there are consecutive 3 numbers
@@ -98,7 +102,8 @@ class DataValidator:
     def check_bmi(data):
         """
         Check if the input BMI is valid.
-        :return: Formatted BMI if the input one is valid, otherwise, return None
+        :return: Formatted BMI if the input one is valid,
+        otherwise, return None
         :Author: Zhiming Liu
         """
         # Convert the input data to string
@@ -111,8 +116,9 @@ class DataValidator:
         if match_obj:
             # Get the matched word
             bmi = match_obj.group("bmi")
-            # Convert the first letter to uppercase and lowercase for rest of them
-            bmi = " ".join(text[0].upper() + text[1:] for text in bmi.split())  # Capitalise the first letter
+            # Convert the first letter to uppercase
+            # and lowercase for rest of them
+            bmi = " ".join(text[0].upper() + text[1:] for text in bmi.split())
             return bmi
         # Return None if no match found
         return None
@@ -121,7 +127,8 @@ class DataValidator:
     def check_salary(data):
         """
         Check if the input salary is valid.
-        :return: Formatted salary if the input one is valid, otherwise, return None
+        :return: Formatted salary if the input one is valid,
+        otherwise, return None
         :Author: Zhiming Liu
         """
         # Regular expression checks if there are consecutive 3 numbers
@@ -149,7 +156,8 @@ class DataValidator:
         if match:
             date = "-".join(match.groups())
             struct = strptime(date, "%d-%m-%Y")
-            return "{0:02}-{1:02}-{2:04}".format(struct.tm_mday, struct.tm_mon, struct.tm_year)
+            return "{0:02}-{1:02}-{2:04}"\
+                .format(struct.tm_mday, struct.tm_mon, struct.tm_year)
         else:
             return None
 

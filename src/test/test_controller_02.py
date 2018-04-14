@@ -4,6 +4,7 @@ from io import StringIO
 from os import path, remove, getcwd, chdir
 from controller import Controller
 
+
 class TestController02(unittest.TestCase):
     def setUp(self):
         self.ctl = Controller()
@@ -30,7 +31,7 @@ class TestController02(unittest.TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=StringIO)
     def test_do_import_04(self, mock_stdout):
-        chdir(getcwd()) # pragma: no cover
+        chdir(getcwd())  # pragma: no cover
         pk_path = 'test_files/testingdata.pk'
         if path.exists(pk_path):  # pragma: no cover
             remove(pk_path)  # pragma: no cover
@@ -56,5 +57,5 @@ class TestController02(unittest.TestCase):
         self.assert_import_stdout(cmdline, result)
 
 
-if __name__ == '__main__': # pragma: no cover
-    unittest.main(verbosity=2) # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
+    unittest.main(verbosity=2)  # pragma: no cover

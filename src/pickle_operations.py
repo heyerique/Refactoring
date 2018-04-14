@@ -4,7 +4,8 @@ from os import path, makedirs, getcwd, chdir
 
 class PickleOperations:
     """
-    This is class for dump pickled file to a local file, and load data from a local file
+    This is class for dump pickled file to a local file,
+    and load data from a local file
     :Author: Zhiming Liu
     """
     def pickle_dump(self, filepath, data):

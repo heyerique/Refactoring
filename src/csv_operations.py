@@ -6,7 +6,8 @@ from data import Data
 
 class CSVOperations(IDataAccess):
     """
-    This is class for reading from a specified CSV file and writing new data to it
+    This is class for reading from a specified CSV file
+    and writing new data to it
     :Author: Zhiming Liu
     """
     # CSV file path
@@ -15,7 +16,8 @@ class CSVOperations(IDataAccess):
     __dir = None
     __file_name = None
 
-    # The header of data field in the CSV file. Also for data dictionaries
+    # The header of data field in the CSV file.
+    # Also for data dictionaries
     _fieldnames = None
 
     def __init__(self, file_path, create=False):
@@ -59,7 +61,8 @@ class CSVOperations(IDataAccess):
         This function return content of the CSV file
         :return: None
         """
-        # Try to open the file for read. newline to avoid different newline signs
+        # Try to open the file for read.
+        # newline to avoid different newline signs
         with open(self.__path, newline="") as f:
             # Try to read data with given fieldnames
             reader = csv.DictReader(f, fieldnames=self._fieldnames)
@@ -99,6 +102,7 @@ class CSVOperations(IDataAccess):
 # op = CSVOperations('files/data/staffinfo3.csv', True)
 # # print(op.read())
 # new_data_01 = [{"empid": "Y413", "gender": "M", "age": 41, "sales": 200,
-# "bmi": "Obesity", "salary": 450, "birthday": "01-09-1977"}, {"empid": "Y414", "gender": "F", "age": 33, "sales": 200,
+# "bmi": "Obesity", "salary": 450, "birthday": "01-09-1977"},
+#  {"empid": "Y414", "gender": "F", "age": 33, "sales": 200,
 # "bmi": "Obesity", "salary": 450, "birthday": "04-10-1985"}]
 # op.save(new_data_01)

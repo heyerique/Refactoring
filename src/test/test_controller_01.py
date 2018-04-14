@@ -4,6 +4,7 @@ from io import StringIO
 from os import path, remove
 from controller import Controller
 
+
 class TestController01(unittest.TestCase):
     def setUp(self):
         self.ctl = Controller()
@@ -15,7 +16,8 @@ class TestController01(unittest.TestCase):
 
     def test_do_select_01(self):
         cmdline = '-csv'
-        result = 'No CSV file path specified. A default file \"staffinfo.csv\" will be used.'
+        result = 'No CSV file path specified. ' \
+                 'A default file \"staffinfo.csv\" will be used.'
         self.assert_select_stdout(cmdline, result)
 
     def test_do_select_02(self):
@@ -36,7 +38,7 @@ class TestController01(unittest.TestCase):
     def test_do_select_05(self):
         cmdline = '-db'
         result = ''
-        self.assert_select_stdout(cmdline,result)
+        self.assert_select_stdout(cmdline, result)
 
     def test_do_select_06(self):
         cmdline = '-csv -invalid -command'
@@ -49,5 +51,5 @@ class TestController01(unittest.TestCase):
         self.assert_select_stdout(cmdline, result)
 
 
-if __name__ == '__main__': # pragma: no cover
-    unittest.main(verbosity=2) # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
+    unittest.main(verbosity=2)  # pragma: no cover

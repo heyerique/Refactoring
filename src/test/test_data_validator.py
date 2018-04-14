@@ -60,5 +60,5 @@ class TestDataValidator(unittest.TestCase):
         self.assertEqual(self.vld.check_all(data), result)
 
 
-if __name__ == '__main__': # pragma: no cover
-    unittest.main(verbosity=2) # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
+    unittest.main(verbosity=2)  # pragma: no cover
