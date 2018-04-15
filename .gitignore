@@ -1,8 +1,8 @@
 .idea
 venv
-__pycahe__
+__pycache__
 .coverage
 src\.idea
 src\venv
-src\__pycahe__
-src\.coverage
+\src\__pycache__
+\src\.coverage
