@@ -1,6 +1,7 @@
 from data import Data
 from csv_operations import CSVOperations
 from database_conn import Database
+from gender_counter import GenderCounter
 
 
 class StaffData:
@@ -99,26 +100,13 @@ class StaffData:
         return self.data + self.new_data
 
     def get_gender(self):
-        """
-        Get gender statistics
-        :return: <Dictionary> gender
-        :Author: Zhiming Liu
-        """
-        all_data = self.get_all_data()
-        if len(all_data) == 0:
-            return {}
-
-        male = 0
-        female = 0
-        for row in all_data:
-            # Calculate sum of male
+        counter = GenderCounter()
+        for row in self.get_all_data():
             if row[Data.GENDER.name] == "M":
-                male += 1
-            # Calculate sum of female
+                counter.male_count += 1
             else:
-                female += 1
-
-        return {"Male": male, "Female": female}
+                counter.female_count += 1
+        return counter
 
     def get_bmi(self):
         bmi = {}

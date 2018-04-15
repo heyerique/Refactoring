@@ -1,0 +1,11 @@
+1.	Create class Counter and GenderCounter
+2.	Test the code and make sure it works
+3.	Create a new method get_gender2 to achieve the same functionality of the original method get_gender
+4.	Test the code to ensure the method get_gender2 works and returns an object with correct values
+5.	Find one the place where get_gender is called and modify the code for the new method get_gender2
+6.	Test the code to ensure no faults and the functionality doesn¡¯t change
+7.	Keep doing step 5 to 6 until all place of calling get_gender is updated for using get_gender2
+8.	Test the code to ensure no faults and the functionality doesn¡¯t change
+9.	Remove the original method get_gender, rename the new method get_gender2 to get_gender, replace all the places where get_gender2 is called to get_gender.
+10.	Test the code to ensure no faults and the functionality doesn¡¯t change
+11.	Inspect the code to assure no new code smells introduced.

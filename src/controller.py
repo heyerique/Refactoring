@@ -274,12 +274,12 @@ class Controller(Cmd):
         """
         # Draw Pies
         try:
-            if len(self._std.get_gender()) == 0 \
+            if self._std.get_gender().total_count == 0 \
                     or len(self._std.get_bmi()) == 0:
                 raise ValueError("No data to display.")
             # Draw gender
             if line.upper() == Data.GENDER.name:
-                View.plot_pie(self._std.get_gender(),
+                View.plot_pie(self._std.get_gender().format_data,
                               "Gender Distribution",
                               "People")
             # Draw BMI
@@ -301,12 +301,12 @@ class Controller(Cmd):
         """
         # Draw Bars
         try:
-            if len(self._std.get_gender()) == 0 \
+            if self._std.get_gender().total_count == 0 \
                     or len(self._std.get_gender()) == 0:
                 raise ValueError("No data to display.")
             # Draw gender
             if line.upper() == Data.GENDER.name:
-                View.plot_bar(self._std.get_gender(),
+                View.plot_bar(self._std.get_gender().format_data,
                               "Gender Distribution",
                               "numer of people")
             # Draw BMI
