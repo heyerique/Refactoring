@@ -34,6 +34,6 @@ class GenderCounter:
         return self._male_counter.count + self._female_counter.count
 
     @property
-    def format_data(self):
+    def formatted_data(self):
         return {self._male_counter.name: self._male_counter.count,
                 self._female_counter.name: self._female_counter.count}

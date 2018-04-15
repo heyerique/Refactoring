@@ -2,7 +2,7 @@
 venv
 __pycache__
 .coverage
-src\.idea
-src\venv
-\src\__pycache__
-\src\.coverage
+src/.idea
+src/venv
+src/__pycache__
+src/.coverage
