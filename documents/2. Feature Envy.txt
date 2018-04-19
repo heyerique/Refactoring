@@ -1,0 +1,18 @@
+1.	Create a method import_result in class Controller and move the code under one conditional statement which has the bad smell to the method.
+2.	Test the code to ensure no faults and the functionality doesn¡¯t change
+3.	Create a list to store all data returned by the method import_row
+4.	Test the code to ensure no fault exists.
+5.	Create a method display_import_result in ViewConsole to achieve the same functionality as the method import_result
+6.	Test the code to ensure no fault exists.
+7.	Replace the code of the method_result by invoking the method display_import_result
+8.	Test the code to ensure no faults and the functionality doesn¡¯t change
+9.	Replace the same code in the second conditional statement which is used for pickle which the new method import_result
+10.	Test the code to ensure no faults and the functionality doesn¡¯t change
+11.	Inspect the code to assure no new code smells introduced.
+12.	Change variable name args to commands
+13.	Test the code to ensure no faults and the functionality doesn¡¯t change
+14.	Remove unnecessary exception handling code
+15.	Test the code to ensure no faults and the functionality doesn¡¯t change
+16.	Move the code under the conditional statements to a new methods import_csv and import_pickle in the same class
+17.	Test the code to ensure no faults and the functionality doesn¡¯t change
+18.	Pass the PEP8 check

@@ -76,6 +76,13 @@ class ViewConsole(View):
                       row[-1]))
 
     @staticmethod
+    def display_import_result(results, ind=False):
+        ViewConsole.display("IMPORTING RESULT:")
+        ViewConsole.import_result_header(ind)
+        for result in results:
+            ViewConsole.import_result_row(result, ind)
+
+    @staticmethod
     def plot_pie(data, title="", unit=""):
         # Get labels and sizes from the data
         labels, values = list(data.keys()), list(data.values())

@@ -127,35 +127,36 @@ class Controller(Cmd):
         :return: None
         :Author: Zhiming Liu
         """
-        args = list(arg.lower() for arg in str(line).split())
+        commands = list(command.lower() for command in str(line).split())
 
-        # CSV
-        if args[0] == "-csv" and len(args) > 1:
-            try:
-                csv = CSVOperations(args[1])
-                import_data = csv.read()
-                View.display("IMPORTING RESULT:")
-                View.import_result_header(True)
-                for d in import_data:
-                    View.import_result_row(self.import_row(d), True)
-            except Exception as e:
-                View.error(e)
-        # Pickle
-        elif args[0] == "-pk" and len(args) > 1:
-            try:
-                pk = PickleOperations()
-                import_data = list(pk.pickle_import(args[1]))
-                View.display("IMPORTING RESULT:")
-                View.import_result_header(True)
-                for d in import_data:
-                    View.import_result_row(self.import_row(d), True)
-            except Exception as e:
-                View.error(e)
-            else:
-                View.success("Data has been loaded from %s" % args[1])
+        if commands[0] == "-csv" and len(commands) > 1:
+            self.import_csv(commands[1])
+
+        elif commands[0] == "-pk" and len(commands) > 1:
+            self.import_pickle(commands[1])
+
         else:
             View.info("Invalid command.")
             View.help_import()
+
+    def import_csv(self, filename):
+        try:
+            csv = CSVOperations(filename)
+            self.import_result(csv.read())
+        except Exception as e:
+            View.error(e)
+
+    def import_pickle(self, filename):
+        try:
+            pk = PickleOperations()
+            self.import_result(list(pk.pickle_import(filename)))
+        except Exception as e:
+            View.error(e)
+
+    def import_result(self, data):
+        View.display_import_result(
+            list(map(lambda row: self.import_row(row), data))
+        )
 
     def import_row(self, raw_data):
         """
@@ -172,10 +173,6 @@ class Controller(Cmd):
             else:
                 self._std.add_data(washed)
                 result.append("Pass")
-        except ValueError:
-            result.append("Fail")
-        except AttributeError:
-            result.append("Fail")
         except Exception:
             result.append("Fail")
         finally:
