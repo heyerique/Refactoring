@@ -1,0 +1,5 @@
+1.	Extract the code in a method, which is used for finding matches with a regular expression, to new methods regx_match and regx_match_group
+2.	Test the code to ensure no faults and the functionality doesn¡¯t change
+3.	Repeat step 1 ¨C 2 until all code smells are gone
+4.	Inspect the code to assure no new code smells introduced.
+5.	Pass the PEP8 check
