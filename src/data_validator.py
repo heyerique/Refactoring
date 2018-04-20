@@ -70,7 +70,7 @@ class DataValidator:
         result = self.regx_match(pattern, data)
         if result is not None:
             return "{0:02}".format(int(result))
-        return None
+        return result
 
     def check_sales(self, data):
         """
@@ -83,7 +83,7 @@ class DataValidator:
         result = self.regx_match(pattern, data)
         if result is not None:
             return "{0:03}".format(int(result))
-        return None
+        return result
 
     def check_bmi(self, data):
         """
@@ -97,7 +97,7 @@ class DataValidator:
         if result is not None:
             return " ".join(text[0].upper() + text[1:]
                             for text in result.split())
-        return None
+        return result
 
     def check_salary(self, data):
         """
@@ -110,7 +110,7 @@ class DataValidator:
         result = self.regx_match(pattern, data)
         if result is not None:
             return "{0:03}".format(int(result))
-        return None
+        return result
 
     def check_birthday(self, data):
         """
@@ -125,8 +125,8 @@ class DataValidator:
             date = strptime("-".join(result), "%d-%m-%Y")
             return "{0:02}-{1:02}-{2:04}"\
                 .format(date.tm_mday, date.tm_mon, date.tm_year)
-        else:
-            return None
+
+        return result
 
     def check_all(self, all_data: list):
         """
