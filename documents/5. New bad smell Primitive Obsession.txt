@@ -1,0 +1,8 @@
+1.	Create a new class ImportCommand for processing and storing the user command
+2.	Test the code to ensure no faults
+3.	Update the method do_import by using the new class ImportCommand
+4.	Test the code to ensure no faults and the functionality doesn¡¯t change
+5.	Reorder the conditional statements
+6.	Test the code to ensure no faults and the functionality doesn¡¯t change
+7.	Inspect the code to assure no new code smells introduced.
+8.	Pass the PEP8 check

@@ -7,6 +7,7 @@ from data import Data
 from csv_operations import CSVOperations
 from pickle_operations import PickleOperations
 from select_command import SelectCommand
+from import_command import ImportCommand
 
 
 class Controller(Cmd):
@@ -112,17 +113,17 @@ class Controller(Cmd):
         :return: None
         :Author: Zhiming Liu
         """
-        commands = list(command.lower() for command in str(line).split())
+        cmd = ImportCommand(line)
 
-        if commands[0] == "-csv" and len(commands) > 1:
-            self.import_csv(commands[1])
-
-        elif commands[0] == "-pk" and len(commands) > 1:
-            self.import_pickle(commands[1])
-
-        else:
+        if cmd.file_type is None or cmd.file_name is None:
             View.info("Invalid command.")
             View.help_import()
+
+        elif cmd.file_type == "csv":
+            self.import_csv(cmd.file_name)
+
+        elif cmd.file_type == "pk":
+            self.import_pickle(cmd.file_name)
 
     def import_csv(self, filename):
         try:
