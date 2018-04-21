@@ -2,6 +2,7 @@ import unittest
 import unittest.mock
 from io import StringIO
 from controller import Controller
+from gender_counter import GenderCounter
 
 
 class TestController03(unittest.TestCase):
@@ -46,7 +47,7 @@ class TestController03(unittest.TestCase):
     def test_do_show_06(self, mock_stdout):
         self.ctl.do_import('-csv testingdata.csv')
         result = {'Male': 6, 'Female': 4}
-        self.assertDictEqual(self.ctl._std.get_gender(), result)
+        self.assertIsInstance(self.ctl._std.get_gender(), GenderCounter)
 
 if __name__ == '__main__':  # pragma: no cover
     unittest.main(verbosity=2)  # pragma: no cover
