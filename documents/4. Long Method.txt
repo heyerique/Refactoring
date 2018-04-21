@@ -1,0 +1,11 @@
+1.	Create a new class SelectCommand for process and store the command input by the user.
+2.	Test the code to ensure no faults
+3.	Update the method do_select by using the new class SelectCommand
+4.	Test the code to ensure no faults and the functionality doesn¡¯t change
+5.	Move the code used for processing CSV files in the method do_select to a new method select_csv in the same class
+6.	Test the code to ensure no faults and the functionality doesn¡¯t change
+7.	Remove unnecessary exception handling code
+8.	Test the code to ensure no faults and the functionality doesn¡¯t change
+9.	Remove unnecessary conditional statements
+10.	Inspect the code to assure no new code smells introduced.
+11.	Pass the PEP8 check
