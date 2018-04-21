@@ -6,6 +6,7 @@ from staff_data import StaffData
 from data import Data
 from csv_operations import CSVOperations
 from pickle_operations import PickleOperations
+from select_command import SelectCommand
 
 
 class Controller(Cmd):
@@ -32,50 +33,34 @@ class Controller(Cmd):
         :return: None
         :Author: Zhiming Liu
         """
-        # Available data sources
-        options = "-csv", "-db"
-        args = list(arg.lower() for arg in str(line).split())
+        cmd = SelectCommand(line)
 
+        if cmd.resource_type is None:
+            View.error("The data resource is not available.")
+
+        elif cmd.resource_type == "csv":
+            self.select_csv(cmd)
+
+        elif cmd.resource_type == "db":
+            self._std.select_source(cmd.resource_type)
+
+    def select_csv(self, cmd):
         try:
-            # Check if the input data source is available
-            if args[0] not in options:
-                raise Exception("The data resource is not available.")
+            if cmd.file_name is None:
+                self._std.select_source(cmd.resource_type,
+                                        cmd.default_csv_file)
+                View.warning("No CSV file path specified. "
+                             "A default file \"{0}\" "
+                             "will be used.".format(cmd.default_csv_file))
+
             else:
-                # Code for initialise CSV data source
-                if args[0] == "-csv":
-                    try:
-                        if len(args) == 1:
-                            self._std.select_source(args[0][1:],
-                                                    "staffinfo.csv")
-                            View.warning("No CSV file path specified. "
-                                         "A default file \"staffinfo.csv\" "
-                                         "will be used.")
-                        elif len(args) == 2:
-                            self._std.select_source(args[0][1:], args[1])
-                        elif len(args) == 3:
-                            if args[1] == "-a":
-                                self._std.select_source(args[0][1:],
-                                                        args[2],
-                                                        True)
-                            else:
-                                raise Exception('Invalid command.')
-                        else:
-                            raise Exception('Invalid command.')
-                    except (CSVError, OSError) as e:
-                        View.error(e)
-                    except Exception as e:
-                        View.error(e)
-                    else:
-                        View.success("Data source CSV is selected.")
-
-                # Code for initialise database source
-                elif args[0] == "-db":
-                    self._std.select_source(args[0][1:])
-
-        # Catch and display error message
+                self._std.select_source(cmd.resource_type,
+                                        cmd.file_name,
+                                        cmd.create_file)
         except Exception as e:
             View.error(e)
-            View.help_select()
+        else:
+            View.success("Data source CSV is selected.")
 
     def do_add(self, line):
         """
