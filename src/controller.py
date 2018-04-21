@@ -47,13 +47,16 @@ class Controller(Cmd):
 
     def select_csv(self, cmd):
         try:
-            if cmd.file_name is None:
+            if not cmd.is_valid_command:
+                View.error("Invalid command.")
+                View.help_select()
+
+            elif cmd.file_name is None:
                 self._std.select_source(cmd.resource_type,
                                         cmd.default_csv_file)
                 View.warning("No CSV file path specified. "
                              "A default file \"{0}\" "
                              "will be used.".format(cmd.default_csv_file))
-
             else:
                 self._std.select_source(cmd.resource_type,
                                         cmd.file_name,

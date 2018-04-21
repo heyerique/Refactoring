@@ -17,6 +17,7 @@ class SelectCommand:
     def resource_type(self):
         if self._commands[0] in self._resource_types:
             self._resource_type = self._commands[0][1:]
+
         return self._resource_type
 
     @property
@@ -30,6 +31,20 @@ class SelectCommand:
     def file_name(self):
         if len(self._commands) == 2:
             self._file_name = self._commands[1]
-        if len(self._commands) == 3:
+        if len(self._commands) == 3 and self.create_file:
             self._file_name = self._commands[2]
         return self._file_name
+
+    @property
+    def is_valid_command(self):
+        if len(self._commands) == 1:
+            return True
+
+        if len(self._commands) == 2 \
+                and self.resource_type is not None:
+            return True
+
+        if self.create_file:
+            return True
+
+        return False
